@@ -9,17 +9,26 @@ def column_check(sudoku, column_no):
     A column is valid if numbers 1 to 9 appear at most once (0s are ignored).
 
     @param sudoku [list]: list of list of int, the Sudoku grid
-    @param column_no [list]: the index of the column to check (0 based)
+    @param column_no [int]: the index of the column to check (0 based)
 
     @return [bool], returns True if the column is correct, False otherwise.
     """
 
-    # TODO: use set() to create a new set to record checked position. Since set doesn't allow unique items, if the set contains the same number, we know that there is a conflict
+    # use set() to record checked numbers in this column
+    seen = set()
 
     for row in sudoku:
-        # TODO: get the number using `column_no` as the index of the list item
-        # TODO: If the number is not 0, then we check if the number is already in the set. If the number in the set, it means this number exists, directly return False; otherwise add this number to the set, and continue until all numbers are checked.
+        # get the number using `column_no` as the index
+        num = row[column_no]
 
+        if num != 0:
+            # if already in set, we found a duplicate
+            if num in seen:
+                return False
+            # otherwise record it
+            seen.add(num)
+
+    # no duplicates found
     return True
 
 
