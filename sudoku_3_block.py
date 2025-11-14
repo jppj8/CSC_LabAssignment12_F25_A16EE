@@ -1,33 +1,3 @@
-# The program is the 2nd part of the sudoku checking, checking the columns.
-# The program sends a sudoku matrix to function `column_check()`,
-# the function would check if the specific column is valid.
-
-"""
-The followings represent 9 Sudoku blocks.
-+-------+-------+-------+
-| S . . | S . . | S . . |
-| . . . | . . . | . . . |
-| . . . | . . . | . . . |
-+-------+-------+-------+
-| S . . | S . . | S . . |
-| . . . | . . . | . . . |
-| . . . | . . . | . . . |
-+-------+-------+-------+
-| S . . | S . . | S . . |
-| . . . | . . . | . . . |
-| . . . | . . . | . . . |
-+-------+-------+-------+
-
-Different with row and column check, we send two index numbers to the function.
-They are the starting row index and starting column index of a block.
-You can assume that only the starting indices will be sent to the function.
-
-All possible starting indice pair would be:
-    (0, 0), (0, 3), (0, 6), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3) and (6, 6).
-They are marked as "S" in above matrix.
-"""
-
-
 def block_check(sudoku, row_no, column_no):
     """
     Checks if a 3x3 block in a Sudoku grid is valid.
@@ -40,13 +10,21 @@ def block_check(sudoku, row_no, column_no):
     @return: bool - True if the block is correct, False otherwise.
     """
 
-    # TODO: use set() to create a new set to record checked position. Since set doesn't allow unique items, if the set contains the same number, we know that there is a conflict
+    # use set() to record checked numbers in this 3x3 block
+    seen = set()
 
     for i in range(row_no, row_no + 3):
         for j in range(column_no, column_no + 3):
             num = sudoku[i][j]
 
-            # TODO: If the number is not 0, then we check if the number is already in the set. If the number in the set, it means this number exists, directly return False; otherwise add this number to the set, and continue until all numbers are checked.
+            # ignore zeros (empty cells)
+            if num != 0:
+                # duplicate found → invalid block
+                if num in seen:
+                    return False
+                seen.add(num)
+
+    # no duplicates found
     return True
 
 
