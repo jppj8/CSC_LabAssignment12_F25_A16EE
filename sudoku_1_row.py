@@ -9,19 +9,27 @@ def row_check(sudoku, row_no):
     A row is valid if numbers 1 to 9 appear at most once (0s are ignored).
 
     @param sudoku [list]: list of list of int, the Sudoku grid
-    @param row_no [list]: the index of the row to check (0 based)
+    @param row_no [int]: the index of the row to check (0 based)
 
     @return [bool], returns True if the row is correct, False otherwise.
     """
 
-    # TODO: use set() to create a new set to record checked position. Since set doesn't allow unique items, if the set contains the same number, we know that there is a conflict
+    # use set() to create a new set to record checked numbers
+    seen = set()
 
     row_to_check = sudoku[row_no]  # get the row to check
 
     for num in row_to_check:
-        # TODO: use loop to check every item of the row. If the number is not 0, then we check if the number is already in the set. If the number in the set, it means this number exists, directly return False; otherwise add this number to the set, and continue until all numbers are checked.
+        # ignore 0s (empty cells)
+        if num != 0:
+            # if already seen, row is invalid
+            if num in seen:
+                return False
+            # otherwise record it
+            seen.add(num)
 
-    # TODO: return True if the loop terminates normally (all numbers are checked without duplication found)
+    # if we finish the loop, no duplicates were found
+    return True
 
 
 if __name__ == "__main__":
