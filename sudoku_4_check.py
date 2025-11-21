@@ -1,3 +1,6 @@
+# This program combines row checking, column checking, and block checking,
+# it could use all three functions written in other Sudoku program.
+
 from sudoku_1_row import row_check
 from sudoku_2_column import column_check
 from sudoku_3_block import block_check
@@ -13,20 +16,17 @@ def sudoku_grid_correct(sudoku: list):
 
     # Check all rows
     for row in range(9):
-        # call row_check(), if any row is invalid, return False
         if not row_check(sudoku, row):
             return False
 
     # Check all columns
     for col in range(9):
-        # call column_check(), if any column is invalid, return False
         if not column_check(sudoku, col):
             return False
 
     # Check all 3x3 blocks
-    # starting indices: 0, 3, 6 for both rows and columns
-    for row in range(0, 9, 3):
-        for col in range(0, 9, 3):
+    for row in range(0, 9, 3):      # 0, 3, 6
+        for col in range(0, 9, 3):  # 0, 3, 6
             if not block_check(sudoku, row, col):
                 return False
 

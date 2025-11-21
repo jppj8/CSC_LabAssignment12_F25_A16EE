@@ -1,11 +1,3 @@
-# This program sends a Go board to the function `who_won()`, and the function
-# returns who won the game based on the board.
-#
-# The scoring rules of Go is quite complex, but in this exercise, we just
-# count the number of pieces each player has on the game board.
-# Also, please notice that we don't have the size limitation on the board.
-
-
 def who_won(board):
     """
     Determines the winner based on the number of stones on the board.
@@ -23,7 +15,7 @@ def who_won(board):
     player1_count = 0
     player2_count = 0
 
-    # use two level loop to check the value of every spot
+    # two-level loop to check every spot on the board
     for row in board:
         for spot in row:
             if spot == 1:

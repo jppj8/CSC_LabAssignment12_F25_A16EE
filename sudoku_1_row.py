@@ -1,35 +1,25 @@
-# The program is the 1st part of the sudoku checking, checking on the rows.
-# The program sends a sudoku matrix to function `row_check()`,
-# the function would check if the specific row is valid.
-
-
 def row_check(sudoku, row_no):
     """
     Checks if a given row in a Sudoku grid is valid.
     A row is valid if numbers 1 to 9 appear at most once (0s are ignored).
 
     @param sudoku [list]: list of list of int, the Sudoku grid
-    @param row_no [int]: the index of the row to check (0 based)
+    @param row_no [list]: the index of the row to check (0 based)
 
     @return [bool], returns True if the row is correct, False otherwise.
     """
 
-    # use set() to create a new set to record checked numbers
-    seen = set()
+    checked = set()  # record numbers we've already seen
 
     row_to_check = sudoku[row_no]  # get the row to check
 
     for num in row_to_check:
-        # ignore 0s (empty cells)
-        if num != 0:
-            # if already seen, row is invalid
-            if num in seen:
+        if num != 0:                 # ignore empty spots
+            if num in checked:       # duplicate found
                 return False
-            # otherwise record it
-            seen.add(num)
+            checked.add(num)         # remember this number
 
-    # if we finish the loop, no duplicates were found
-    return True
+    return True  # no duplicates found
 
 
 if __name__ == "__main__":

@@ -4,15 +4,15 @@
 
 def longest_string(strings):
     """
-    Returns the index of the longest string in the given list of strings.
+    Returns the longest string in the given list of strings.
 
     @param strings [list]: The list of strings to search.
-    @return [int]: The index of the longest string in the given list.
+    @retrurn [int]: The index of the longest string in the given list.
     """
 
     index_of_longest = 0  # assume the longest string is the first one
 
-    # Loop through the list and update index_of_longest
+    # loop through the rest of the list and update if we find a longer string
     for i in range(1, len(strings)):
         if len(strings[i]) > len(strings[index_of_longest]):
             index_of_longest = i

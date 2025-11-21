@@ -12,12 +12,11 @@ def count_matching(matrix, target):
     @return [int]: the number of matching elements
     """
 
-    # set initial variable `count`
-    count = 0
+    count = 0  # initial variable
 
-    # external loop to get all nested lists (rows)
+    # external loop: go through each inner list (row)
     for row in matrix:
-        # inner loop to get every element in the row
+        # inner loop: go through each element in the row
         for value in row:
             if value == target:
                 count += 1
@@ -27,4 +26,4 @@ def count_matching(matrix, target):
 
 if __name__ == "__main__":
     m = [[1, 2, 1], [0, 3, 4], [1, 1, 0]]
-    print(count_matching(m, 1))  # should print 4
+    print(count_matching(m, 1))  # prints 4

@@ -10,36 +10,15 @@ def block_check(sudoku, row_no, column_no):
     @return: bool - True if the block is correct, False otherwise.
     """
 
-    # use set() to record checked numbers in this 3x3 block
-    seen = set()
+    checked = set()  # record numbers we've already seen in this block
 
     for i in range(row_no, row_no + 3):
         for j in range(column_no, column_no + 3):
             num = sudoku[i][j]
 
-            # ignore zeros (empty cells)
-            if num != 0:
-                # duplicate found → invalid block
-                if num in seen:
+            if num != 0:             # ignore empty spots
+                if num in checked:   # duplicate found
                     return False
-                seen.add(num)
+                checked.add(num)     # remember this number
 
-    # no duplicates found
-    return True
-
-
-if __name__ == "__main__":
-    sudoku = [
-        [9, 0, 0, 0, 8, 0, 3, 0, 0],
-        [2, 0, 0, 2, 5, 0, 7, 0, 0],
-        [0, 2, 0, 3, 0, 0, 0, 0, 4],
-        [2, 9, 4, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 7, 3, 0, 5, 6, 0],
-        [7, 0, 5, 0, 6, 0, 4, 0, 0],
-        [0, 0, 7, 8, 0, 3, 9, 0, 0],
-        [0, 0, 1, 0, 0, 0, 0, 0, 3],
-        [3, 0, 0, 0, 0, 0, 0, 0, 2],
-    ]
-
-    print(block_check(sudoku, 0, 0))  # False (two 2s in block)
-    print(block_check(sudoku, 0, 3))  # True
+    return True  # no duplicates found
